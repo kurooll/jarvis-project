@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>JARVIS | THE NEXT GEN ASSISTANT</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;400;700&family=JetBrains+Mono:wght@100;400&display=swap');
+
+        :root {
+            --bg: #000000;
+            --text: #ffffff;
+            --glow: 0 0 25px rgba(255, 255, 255, 0.4);
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            overflow-x: hidden;
+            background-attachment: fixed;
+            cursor: crosshair;
+        }
+
+        #canvas-container {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .page {
+            min-height: 100vh;
+            padding: 5% 10%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            border-bottom: 1px solid rgba(255,255,255,0.03);
+            position: relative;
+            box-sizing: border-box;
+        }
+
+        .glow { text-shadow: var(--glow); text-transform: uppercase; letter-spacing: 5px; }
+        h1 { font-size: 6rem; font-weight: 100; margin: 0; pointer-events: none; }
+        h2 { font-size: 2.5rem; font-weight: 200; margin-bottom: 20px; border-left: 2px solid white; padding-left: 30px; }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            margin-top: 20px;
+            max-width: 800px;
+            transition: all 0.3s ease;
+        }
+
+        /* Эффект свечения "лампочки" при наведении */
+        .glass-card:hover { 
+            border-color: rgba(255,255,255,0.5); 
+            background: rgba(255,255,255,0.08); 
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.15), inset 0 0 10px rgba(255, 255, 255, 0.05);
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            max-width: 1000px;
+        }
+
+        .tech-data { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: #555; margin-bottom: 10px; }
+        .highlight { color: #fff; font-weight: 700; margin-bottom: 10px; display: block; }
+        p { line-height: 1.6; font-weight: 300; }
+        
+        .author-highlight { 
+            font-size: 1.8rem; 
+            color: #fff; 
+            font-weight: 700; 
+            text-shadow: 0 0 15px rgba(255,255,255,0.6);
+        }
+        .beta-highlight { 
+            font-size: 1.4rem; 
+            color: #fff; 
+            text-shadow: 0 0 10px rgba(255,255,255,0.4);
+        }
+
+        .page-num { position: absolute; top: 40px; right: 40px; font-family: 'JetBrains Mono'; color: #444; }
+        
+        ::-webkit-scrollbar { width: 3px; }
+        ::-webkit-scrollbar-track { background: #000; }
+        ::-webkit-scrollbar-thumb { background: #555; }
+    </style>
+</head>
+<body>
+
+<div id="canvas-container">
+    <canvas id="render-canvas"></canvas>
+</div>
+
+<section class="page">
+    <div class="page-num">01 / 13</div>
+    <div class="tech-data">SYSTEM_STATUS: ONLINE // VERSION: 1.0</div>
+    <h1 class="glow">JARVIS</h1>
+    <h3 style="font-size: 1.3rem; font-weight: 200; letter-spacing: 14px; color: #fff; margin-top: 15px; text-transform: uppercase;">
+        Your Invisible Co-Pilot
+    </h3>
+    <div style="width: 50px; height: 1px; background: rgba(255,255,255,0.3); margin-top: 30px;"></div>
+</section>
+
+<section class="page">
+    <div class="page-num">02 / 13</div>
+    <h2>01 / Академический модуль</h2>
+    <div class="feature-grid">
+        <div class="glass-card">
+            <span class="highlight">Smart Lecture Concept</span>
+            <p style="color:#888">Технология захвата аудиопотока в аудиториях с мгновенным выделением ключевых тезисов. Система не просто транскрибирует текст, а выстраивает иерархическую структуру знаний (Mind Map) в реальном времени, связывая данные с вашей библиотекой.</p>
+        </div>
+        <div class="glass-card">
+            <span class="highlight">Interactive AR-Library</span>
+            <p style="color:#888">При наведении AR-устройства на любую страницу печатного текста, JARVIS накладывает динамический слой: трехмерные модели механизмов, анимации реакций или интерактивные сноски. Чтение превращается в глубокое визуальное погружение.</p>
+        </div>
+    </div>
+</section>
+
+<section class="page">
+    <div class="page-num">03 / 13</div>
+    <h2>02 / Бытовая эффективность</h2>
+    <div class="glass-card">
+        <span class="highlight">Visual Object Tracking & Memory</span>
+        <p style="color:#888">Использование постоянного буфера визуальной памяти позволяет индексировать положение всех предметов. JARVIS проанализирует последние 24 часа видеопотока и подсветит координаты любого потерянного объекта в пространстве маркером дополненной реальности.</p>
+    </div>
+</section>
+
+<section class="page">
+    <div class="page-num">04 / 13</div>
+    <h2>03 / Интеграция с домом</h2>
+    <div class="glass-card">
+        <span class="highlight">Universal IoT Hub</span>
+        <p style="color:#888">Центральный узел для умных устройств. Благодаря протоколам Matter и Thread, система обеспечивает мгновенную реакцию: от автоматической подготовки климата до управления средой через интуитивные микро-жесты, считываемые AR-датчиками.</p>
+    </div>
+</section>
+
+<section class="page">
+    <div class="page-num">05 / 13</div>
+    <h2>04 / Биометрия и Фокус</h2>
+    <div class="feature-grid">
+        <div class="glass-card">
+            <span class="highlight">Focus State Keeper</span>
+            <p style="color:#888">Анализируя направление взгляда и паттерны набора текста, JARVIS определяет состояние "Потока". В этом режиме система блокирует уведомления и меняет освещение на холодный спектр для поддержания концентрации.</p>
+        </div>
+        <div class="glass-card">
+            <span class="highlight">Stress & Heart Rate Analysis</span>
+            <p style="color:#888">Мониторинг вариабельности сердечного ритма позволяет предсказывать выгорание. JARVIS предложит сделать перерыв или провести дыхательную практику еще до появления явных признаков усталости.</p>
+        </div>
+    </div>
+</section>
+
+<section class="page">
+    <div class="page-num">06 / 13</div>
+    <h2>05 / Анализ Big Data</h2>
+    <div class="glass-card">
+        <span class="highlight">Life Patterns Visualization</span>
+        <p style="color:#888">Система собирает данные о сне, питании и продуктивности. С помощью предиктивной аналитики JARVIS находит скрытые зависимости: например, как качество воздуха в спальне влияет на вашу скорость принятия решений на следующий день.</p>
+    </div>
+</section>
+
+<section class="page">
+    <div class="page-num">07 / 13</div>
+    <h2>06 / Социальный слой</h2>
+    <div class="glass-card">
+        <span class="highlight">Neural Social Assistant</span>
+        <p style="color:#888">Во время встреч JARVIS выводит краткие досье: имена, должности и ключевые факты из прошлых переписок. Система анализирует тональность диалога и может подсказать подходящую тему для разговора в реальном времени.</p>
+    </div>
+</section>
+
+<section class="page">
+    <div class="page-num">08 / 13</div>
+    <h2>07 / Безопасность</h2>
+    <div class="glass-card">
+        <span class="highlight">Edge Processing & Zero Knowledge</span>
+        <p style="color:#888">Главный принцип — локальность. Все аудио и видеоданные обрабатываются на чипе вашего устройства. В облако попадают только анонимизированные метаданные, зашифрованные методом сквозного шифрования. Ваша жизнь остается приватной.</p>
+    </div>
+</section>
+
+<section class="page">
+    <div class="page-num">09 / 13</div>
+    <h2>08 / Требования системы</h2>
+    <div class="feature-grid">
+        <div class="glass-card">
+            <span class="highlight">Hardware Backbone</span>
+            <p style="color:#888">Требуется архитектура NPU с производительностью не менее 120 TOPS для параллельного запуска LLM и компьютерного зрения. Минимум 32 ГБ объединенной памяти и LiDAR-сенсоры для 3D-позиционирования.</p>
+        </div>
+        <div class="glass-card">
+            <span class="highlight">Optics & Sensors</span>
+            <p style="color:#888">AR-очки с частотой 120 Гц и разрешением 4K. Непрерывная калибровка датчиков движения для исключения задержек интерфейса в пространстве.</p>
+        </div>
+    </div>
+</section>
+
+<section class="page">
+    <div class="page-num">10 / 13</div>
+    <h2>09 / Техническая работа</h2>
+    <div class="feature-grid">
+        <div class="glass-card">
+            <span class="highlight">Advanced Computer Vision</span>
+            <p style="color:#888">Алгоритмы YOLO v10 анализируют 120 кадров в секунду. Система сегментирует реальность в реальном времени, отделяя статические объекты от динамических. Это позволяет ИИ "понимать" физику мира и точно накладывать виртуальные слои данных на реальные объекты.</p>
+        </div>
+        <div class="glass-card">
+            <span class="highlight">Binaural Audio Engine</span>
+            <p style="color:#888">Использование 8-микрофонной решетки позволяет фокусироваться на конкретном источнике звука (Beamforming). Нейросеть фильтрует фоновый шум и эхо, обеспечивая идеальное распознавание команд даже в шумной толпе или при включенной музыке.</p>
+        </div>
+        <div class="glass-card">
+            <span class="highlight">Neural Data Flow</span>
+            <p style="color:#888">Внутренняя шина данных объединяет потоки от сенсоров в единый контекстный граф. Это позволяет JARVIS мгновенно сопоставлять то, что он видит, с тем, что он слышит, создавая целостную картину происходящего для принятия решений.</p>
+        </div>
+    </div>
+</section>
+
+<section class="page">
+    <div class="page-num">11 / 13</div>
+    <h2>10 / Техническое ядро</h2>
+    <div class="glass-card">
+        <span class="highlight">Self-Learning Kernel v8.2</span>
+        <p style="color:#888">Ядро JARVIS оптимизирует алгоритмы под ваши паттерны поведения за первые 48 часов. Протоколы на базе квантово-устойчивого шифрования гарантируют защиту системы от любых киберугроз будущего.</p>
+    </div>
+</section>
+
+<section class="page">
+    <div class="page-num">12 / 13</div>
+    <h1 class="glow" style="font-size: 4rem;">END OF REPORT</h1>
+    <div class="glass-card" style="max-width: 850px; border-left: 5px solid white;">
+        <p style="font-size: 1.2rem; margin-bottom: 40px; color: #aaa;">Проект JARVIS — это переход от инструментов, которыми мы пользуемся, к системам, с которыми мы существуем в симбиозе. Будущее уже здесь.</p>
+        <div class="tech-data" style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 30px; line-height: 2.8;">
+            AUTHOR: <span class="author-highlight">Amanzhol Eraly</span> <br> 
+            PROJECT STATUS: <span class="beta-highlight">BETA TEST STARTING 2028</span>
+        </div>
+    </div>
+</section>
+
+<section class="page">
+    <div class="page-num">13 / 13</div>
+    <div class="tech-data">COMMUNICATION_END: SUCCESSFUL</div>
+    <h1 class="glow" style="font-size: 5rem;">THANK YOU</h1>
+    <div style="width: 100px; height: 2px; background: #fff; margin: 40px 0; box-shadow: 0 0 15px #fff;"></div>
+    <p style="font-size: 1.5rem; letter-spacing: 5px; text-transform: uppercase; font-weight: 100; color: rgba(255,255,255,0.7);">
+        Благодарим за внимание к проекту
+    </p>
+    <div class="tech-data" style="margin-top: 50px; opacity: 0.5;">JARVIS INTERFACE TERMINATED...</div>
+</section>
+
+<script>
+    const canvas = document.getElementById('render-canvas');
+    const ctx = canvas.getContext('2d');
+    let width, height, scrollY = 0;
+    let mouseX = 0, mouseY = 0;
+
+    function resize() {
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
+        initParticles();
+    }
+    window.addEventListener('resize', resize);
+    window.addEventListener('scroll', () => { scrollY = window.pageYOffset; });
+    window.addEventListener('mousemove', (e) => {
+        mouseX = (e.clientX - width / 2) * 0.05;
+        mouseY = (e.clientY - height / 2) * 0.05;
+    });
+
+    const cubeCount = 12; 
+    const radius = 280;    
+    let angle = 0;
+
+    const backgroundParticles = [];
+    const particleCount = 200;
+
+    function initParticles() {
+        backgroundParticles.length = 0;
+        for (let i = 0; i < particleCount; i++) {
+            backgroundParticles.push({
+                x: Math.random() * width,
+                y: Math.random() * height,
+                size: Math.random() * 1.5 + 0.2,
+                speedY: Math.random() * 0.5 + 0.1,
+                opacity: Math.random() * 0.5 + 0.1
+            });
+        }
+    }
+
+    function drawCube(x, y, size, rx, ry, opacity) {
+        ctx.strokeStyle = `rgba(255, 255, 255, ${opacity})`;
+        ctx.lineWidth = 1;
+        const drawLayer = (s) => {
+            const points = [];
+            for(let i=0; i<8; i++) {
+                let px = (i & 1 ? 1 : -1) * s;
+                let py = (i & 2 ? 1 : -1) * s;
+                let pz = (i & 4 ? 1 : -1) * s;
+                let ty = py * Math.cos(rx) - pz * Math.sin(rx);
+                let tz = py * Math.sin(rx) + pz * Math.cos(rx);
+                py = ty; pz = tz;
+                let tx = px * Math.cos(ry) + pz * Math.sin(ry);
+                px = tx;
+                const f = 500 / (500 + pz);
+                points.push({ x: x + px * f, y: y + py * f });
+            }
+            const conn = [[0,1],[1,3],[3,2],[2,0],[4,5],[5,7],[7,6],[6,4],[0,4],[1,5],[2,6],[3,7]];
+            conn.forEach(([i, j]) => {
+                ctx.beginPath();
+                ctx.moveTo(points[i].x, points[i].y);
+                ctx.lineTo(points[j].x, points[j].y);
+                ctx.stroke();
+            });
+        };
+        drawLayer(size);
+        ctx.strokeStyle = `rgba(255, 255, 255, ${opacity * 0.3})`;
+        drawLayer(size * 0.5);
+    }
+
+    function animate() {
+        ctx.clearRect(0, 0, width, height);
+        backgroundParticles.forEach(p => {
+            ctx.fillStyle = `rgba(255, 255, 255, ${p.opacity})`;
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+            ctx.fill();
+            p.y -= p.speedY;
+            if (p.y < -10) p.y = height + 10;
+        });
+        const centerX = width > 1000 ? width * 0.75 : width / 2;
+        const centerY = height / 2;
+        angle += 0.005;
+        const scrollEffect = scrollY * 0.001;
+        for (let i = 0; i < cubeCount; i++) {
+            const a = (i / cubeCount) * Math.PI * 2 + angle;
+            const rx = centerX + Math.cos(a) * radius + mouseX;
+            const ry = centerY + Math.sin(a) * radius * 0.4 + mouseY + Math.sin(scrollEffect + i) * 15;
+            const depthOpacity = (Math.sin(a) + 1.2) / 2.2;
+            drawCube(rx, ry, 35, angle + i, angle * 0.5 + scrollEffect, depthOpacity * 0.4);
+        }
+        requestAnimationFrame(animate);
+    }
+
+    resize();
+    animate();
+</script>
+
+</body>
+</html>
